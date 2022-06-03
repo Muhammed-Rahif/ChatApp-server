@@ -21,3 +21,7 @@ type ErrorType {
 }
 
 union DeletedUser = UserData | ErrorType
+
+type Subscription {
+  onMessage: UserData!
+}

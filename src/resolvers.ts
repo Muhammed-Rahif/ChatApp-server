@@ -5,8 +5,17 @@ import {
   deleteUser,
 } from "../controllers/users";
 import { UserDataType } from "../types/user";
+import { ErrorType } from "../types/error";
+import { ON_MESSAGE } from "../constants/events";
 
 const resolvers = {
+  Subscription: {
+    onMessage: {
+      subscribe: (_: any, __: any, { pubsub }: any) => {
+        pubsub.asyncIterator(ON_MESSAGE);
+      },
+    },
+  },
   Query: {
     getAllUsers,
     getUserById: (_: any, { id }: any, __: any) => getUser(id),

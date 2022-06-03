@@ -2,6 +2,7 @@ import jsonfile from "jsonfile";
 import { DB_PATH } from "../constants";
 import { v4 } from "uuid";
 import { UserDataType } from "../types/user";
+import { ErrorType } from "../types/error";
 
 export function getAllUsers(): UserDataType[] {
   const users: UserDataType[] = jsonfile.readFileSync(`.${DB_PATH}`);
