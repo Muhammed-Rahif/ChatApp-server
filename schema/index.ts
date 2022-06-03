@@ -4,6 +4,7 @@ const typeDefs = gql`
   type Query {
     getAllUsers: [UserData!]!
     getUserById(id: ID!): UserData
+    getUserByEmail(email: String!): IfUser
   }
 
   type Mutation {
@@ -12,7 +13,7 @@ const typeDefs = gql`
       profileImageUrl: String!
       email: String!
     ): UserData!
-    deleteUser(id: ID!): DeletedUser
+    deleteUser(id: ID!): IfUser
   }
 
   type UserData {
@@ -27,7 +28,7 @@ const typeDefs = gql`
     message: String!
   }
 
-  union DeletedUser = UserData | ErrorType
+  union IfUser = UserData | ErrorType
 
   type Subscription {
     onMessage: UserData!

@@ -10,7 +10,7 @@ export function getAllUsers(): UserDataType[] {
   return users;
 }
 
-export function getUser(id: typeof v4): UserDataType | null {
+export function getUser(id: string): UserDataType | null {
   const users: UserDataType[] = jsonfile.readFileSync(`.${DB_PATH}`);
 
   const user: UserDataType | null =
@@ -30,7 +30,7 @@ export function createUser(newUserData: UserDataType) {
   return newUserData;
 }
 
-export function deleteUser(id: typeof v4): UserDataType | ErrorType {
+export function deleteUser(id: string): UserDataType | ErrorType {
   const users: UserDataType[] = jsonfile.readFileSync(`.${DB_PATH}`);
 
   let userIndex = users.findIndex((userData) => userData.id == id);
@@ -46,4 +46,21 @@ export function deleteUser(id: typeof v4): UserDataType | ErrorType {
   }
 
   return deletedUser;
+}
+
+export function getUserByEmail(email: string): UserDataType | ErrorType {
+  const users: UserDataType[] = jsonfile.readFileSync(`.${DB_PATH}`);
+
+  let userIndex = users.findIndex((userData) => userData.email == email);
+
+  let userData: UserDataType | ErrorType = {
+    statusCode: 404,
+    message: "User not found",
+  };
+
+  if (userIndex !== -1) {
+    userData = users[userIndex];
+  }
+
+  return userData;
 }
