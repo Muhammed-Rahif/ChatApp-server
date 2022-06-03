@@ -1,1 +1,1 @@
-export const ON_MESSAGE = "ON_MESSAGE";
+export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE";

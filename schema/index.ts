@@ -13,7 +13,16 @@ const typeDefs = gql`
       profileImageUrl: String!
       email: String!
     ): UserData!
+
     deleteUser(id: ID!): IfUser
+
+    sendMessage(
+      content: String
+      date: String
+      fromId: String
+      id: String
+      toId: String
+    ): MessageData
   }
 
   type UserData {
@@ -31,7 +40,15 @@ const typeDefs = gql`
   union IfUser = UserData | ErrorType
 
   type Subscription {
-    onMessage: UserData!
+    getMessages: MessageData!
+  }
+
+  type MessageData {
+    content: String
+    id: String
+    fromId: String
+    date: String
+    toId: String
   }
 `;
 
